@@ -4,7 +4,6 @@ const path = require("path");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
-const countriesModel = require("./models/Country");
 const expressSession = require("express-session");
 const User = require("./models/User");
 
@@ -12,9 +11,8 @@ const User = require("./models/User");
 /**
  * Controllers (route handlers).
  */
-const tasterController = require("./controllers/taster");
-const tastingController = require("./controllers/tasting");
-const homeController = require("./controllers/home");
+
+const personController = require("./controllers/person");
 const userController = require("./controllers/user");
 
 const app = express();
@@ -70,7 +68,7 @@ const authMiddleware = async (req, res, next) => {
   next()
 }
 
-app.get("/", homeController.list);
+app.get("/", personController.list);
 
 app.get("/logout", async (req, res) => {
   req.session.destroy();
@@ -78,25 +76,17 @@ app.get("/logout", async (req, res) => {
   res.redirect('/');
 })
 
-app.get("/create-taster", authMiddleware, (req, res) => {
-  res.render("create-taster", { errors: {} });
-});
-
-app.post("/create-taster", tasterController.create);
-
-app.get("/tasters", tasterController.list);
-app.get("/tasters/delete/:id", tasterController.delete);
-app.get("/tasters/update/:id", tasterController.edit);
-app.post("/tasters/update/:id", tasterController.update);
 
 
-app.get("/create-tasting", tastingController.createView);
-app.post("/create-tasting", tastingController.create);
-app.get("/update-tasting/:id", tastingController.edit);
 
 
-app.get("/tastings", tastingController.list);
-app.get("/tastings/delete/:id", tastingController.delete);
+app.get("/create-person", personController.createView);
+app.post("/create-person", personController.create);
+app.get("/update-person/:id", personController.edit);
+
+
+app.get("/persons", personController.list);
+app.get("/persons/delete/:id", personController.delete);
 
 app.get("/join", (req, res) => {
   res.render('create-user', { errors: {} })
