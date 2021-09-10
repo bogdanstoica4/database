@@ -6,7 +6,7 @@ const path = require("path");
 /**
  * constants
  */
-const uri = "mongodb://localhost:27017/bsdata";
+const uri = "mongodb+srv://bogdanstoica4:Nobi1234@cluster0.ym3fj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 async function main() {

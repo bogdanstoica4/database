@@ -29,12 +29,12 @@
       <%- include('common/header'); -%>
 
       <div class="container">
-        <h1 class="text-center">Create A New Person 🍷</h1>
+        <h1 class="text-center">Create A New Person </h1>
         <div class="row justify-content-md-center">
           <div class="col-">
             <form method="POST" action="/create-person">
               <div class="form-group">
-                <label for="name">Wine Title </label>
+                <label for="name">Bogdan Database </label>
                 <input
                   type="text"
                   class="form-control"
@@ -66,12 +66,12 @@
                 <label for="exampleFormControlSelect1">Select Taster</label>
                 <select
                   class="form-control"
-                  name="taster_id"
+                  name="person_id"
                   id="exampleFormControlSelect1"
                 >
-                  <% tasters.forEach( taster => { %>
+                  <% persons.forEach( taster => { %>
 
-                  <option value="<%= taster._id %>"><%= taster.name %></option>
+                  <option value="<%= person._id %>"><%= person.name %></option>
 
                   <% }) %>
                 </select>

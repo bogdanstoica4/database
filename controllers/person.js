@@ -47,7 +47,7 @@ exports.edit = async (req, res) => {
       return;
     }
     res.status(404).send({
-      message: `could find taster ${id}`,
+      message: `could find person ${id}`,
     });
   }
 };
@@ -55,7 +55,7 @@ exports.edit = async (req, res) => {
 exports.create = async (req, res) => {
   try {
 
-    
+    const person = await Person.findById(req.body.person_id)
     await Person.create({
       title: req.body.title,
       taster_name: taster.name,

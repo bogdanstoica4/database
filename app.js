@@ -22,7 +22,7 @@ app.set("view engine", "ejs");
  * notice above we are using dotenv. We can now pull the values from our environment
  */
 
-const { WEB_PORT, MONGODB_URI } = process.env;
+const { PORT, MONGODB_URI } = process.env;
 
 /**
  * connect to database
@@ -31,7 +31,7 @@ const { WEB_PORT, MONGODB_URI } = process.env;
 
 
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on("error", (err) => {
   console.error(err);
   console.log(
@@ -79,7 +79,6 @@ app.get("/logout", async (req, res) => {
 
 
 
-
 app.get("/create-person", personController.createView);
 app.post("/create-person", personController.create);
 app.get("/update-person/:id", personController.edit);
@@ -99,9 +98,9 @@ app.get("/login", (req, res) => {
 app.post("/login", userController.login);
 
 
-app.listen(WEB_PORT, () => {
+app.listen(PORT, () => {
   console.log(
-    `Example app listening at http://localhost:${WEB_PORT}`,
+    `Example app listening at http://localhost:${PORT}`,
     chalk.green("✓")
   );
 });
